@@ -1,0 +1,28 @@
+{
+  "path-intellisense.mappings": {
+    "/": "${workspaceRoot}/src/"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
+  //配置 ESLint 检查的文件类型
+  "eslint.validate": ["javascript", "javascriptreact", "vue", "html"],
+  "liveSassCompile.settings.generateMap": false,
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".acss",
+      "savePath": null
+    }
+  ],
+  "liveSassCompile.settings.autoprefix": ["last 1 version"],
+  "liveSassCompile.settings.excludeList": ["**/node_modules/**", ".vscode/**", "style/_variable.scss"],
+  "emmet.includeLanguages": {
+    "wxml": "html",
+    "axml": "html",
+    "html": "axml",
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "emmet.triggerExpansionOnTab": true
+}

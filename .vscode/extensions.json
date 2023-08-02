@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "va.axml-highlight",
+    "ritwickdey.live-sass",
+    "editorconfig.editorconfig",
+    "formulahendry.auto-close-tag",
+    "alipay.appx-axml-language",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "alipay.minicode",
+    "formulahendry.auto-rename-tag",
+    "vivaxy.vscode-conventional-commits",
+    "christian-kohler.path-intellisense"
+  ]
+}
