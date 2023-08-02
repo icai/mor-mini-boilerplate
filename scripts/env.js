@@ -27,9 +27,9 @@ if (fs.existsSync('.env.local')) {
 
 // merge env
 let injectEnv = {
-  ...defenv.parsed,
-  ...curenv.parsed,
-  ...localEnv.parsed
+  ...defenv?.parsed,
+  ...curenv?.parsed,
+  ...localEnv?.parsed
 }
 
 /**
