@@ -26,6 +26,9 @@
   "scripts": {
     "start": "npm install --registry=https://registry.npmmirror.com",
     "dev": "cross-env NODE_ENV=development mor compile -w",
+    "dev:web": "cross-env NODE_ENV=development mor compile -w --name web",
+    "dev:wx": "cross-env NODE_ENV=development mor compile -w --name wechat",
+    "dev:ali": "cross-env NODE_ENV=development mor compile -w --name alipay",
     "mock": "mor compile -w --mock",
     "build": "cross-env NODE_ENV=development mor compile",
     "build:prod": "cross-env NODE_ENV=production mor compile --production",
