@@ -34,8 +34,8 @@ export default class MorJSPluginImageReplace {
       cb()
     })
     runner.hooks.preprocessorParser.tap(this.name, (fileContent, context, options) => {
-      if (!/(\.(js|axml|acss))|app\.json$/.test(options.fileInfo.path)) return fileContent
-      // 对 js axml acss app.json 文件进行一些前置处理
+      if (!/(\.(js|axml|wxml|acss|wxss|scss|less))|app\.json$/.test(options.fileInfo.path)) return fileContent
+      // 对 js axml wxml ... app.json 文件进行一些前置处理
       return filePathReplace(fileContent, paths, pathmap)
     })
   }
