@@ -7,7 +7,7 @@ export default class MorJSPluginOSS {
     this.name = 'MorJSPluginOSS'
   }
   apply(runner) {
-    const { onlinecdn, cdndir, assetsSrc, assetsBase, version } = this.opts
+    const { cdnPath, ossDir, assetsSrc, assetsBase, version } = this.opts
     // 可通过该 hook 拿到一个 cli 的实例
     runner.hooks.cli.tap(this.name, (cli) => {
       // 通过 cli.command 新建一个命令行指令
@@ -22,13 +22,13 @@ export default class MorJSPluginOSS {
         let [paths, pathmap, osspathmap] = md5File({
           src: assetsSrc,
           base: assetsBase,
-          onlinecdn
+          cdnPath
         })
         pushFile({
           src: assetsSrc,
           base: assetsBase,
           osspathmap,
-          cdndir,
+          ossDir,
           version
         })
       })

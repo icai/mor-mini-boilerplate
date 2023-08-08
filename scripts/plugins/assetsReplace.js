@@ -6,7 +6,7 @@ export default class MorJSPluginAssetsReplace {
     this.name = 'MorJSPluginAssetsReplace'
   }
   apply(runner) {
-    const { onlinecdn, cdndir, assetsSrc, assetsBase, version } = this.opts
+    const { cdnPath, ossDir, assetsSrc, assetsBase, version } = this.opts
     let paths = []
     let pathmap = {}
     let osspathmap = {}
@@ -14,7 +14,7 @@ export default class MorJSPluginAssetsReplace {
       ;[paths, pathmap, osspathmap] = md5File({
         src: assetsSrc,
         base: assetsBase,
-        onlinecdn
+        cdnPath
       })
     }
     runner.hooks.beforeRun.tap(this.name, (command) => {
@@ -27,7 +27,7 @@ export default class MorJSPluginAssetsReplace {
             src: assetsSrc,
             base: assetsBase,
             osspathmap,
-            cdndir,
+            ossDir,
             version
           })
           cb()

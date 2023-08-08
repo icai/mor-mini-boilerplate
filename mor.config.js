@@ -3,7 +3,7 @@ import { getDate } from './scripts/utils.js'
 import { getEnv, getConf } from './scripts/env.js'
 import MorJSPluginAssetsReplace from './scripts/plugins/assetsReplace.js'
 
-const { onlinecdn, cdndir, assetsSrc, assetsBase, version } = getConf()
+const { cdnPath, ossDir, assetsSrc, assetsBase, version } = getConf()
 const injectEnv = getEnv()
 
 export default defineConfig([
@@ -26,8 +26,8 @@ export default defineConfig([
     },
     plugins: [
       new MorJSPluginAssetsReplace({
-        onlinecdn,
-        cdndir,
+        cdnPath,
+        ossDir,
         assetsSrc,
         assetsBase,
         version
@@ -53,8 +53,8 @@ export default defineConfig([
     },
     plugins: [
       new MorJSPluginAssetsReplace({
-        onlinecdn,
-        cdndir,
+        cdnPath,
+        ossDir,
         assetsSrc,
         assetsBase,
         version

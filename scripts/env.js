@@ -45,17 +45,24 @@ export const getEnv = () => {
  * @returns Object
  */
 export const getConf = () => {
-  // cdn 目录 一般为 项目名/版本号
-  let cdndir = process.env.cdnUploadPath
   // oss 域名
-  let cdn = process.env.cdnUpload
+  let ossRoot = process.env.ossRoot
+  // ossDir 目录 一般为 项目名/版本号
+  let ossDir = process.env.ossUploadPath
+  // oss 上传路径
+  let ossPath = ossRoot + ossDir
   // cdn 域名
-  let onlinecdn = process.env.cdnRoot + cdndir
-  cdn = cdn + cdndir
+  let cdnRoot = process.env.cdnRoot
+  // if cdn domain is array
+  cdnRoot = cdnRoot.split(',')
+  // cdn 路径 loop cdnRoot
+  let cdnPath = cdnRoot.map((item) => item + ossDir)
   return {
-    onlinecdn,
-    cdn,
-    cdndir,
+    ossRoot,
+    ossDir,
+    ossPath,
+    cdnRoot,
+    cdnPath, // array
     version: '1_0_0', // 版本号
     assetsSrc: './src/assets/**/*',
     assetsBase: './src/'

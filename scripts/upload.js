@@ -29,16 +29,27 @@ export const md5File = (options) => {
   paths = globby.sync([options.src], {
     base: options.base
   })
-  // console.log('paths', paths)
   let srcproject = options.base
   paths = paths.map((item) => item.replace(srcproject, '/'))
-  paths.forEach((item) => {
-    let filedata = fs.readFileSync(srcproject + item)
-    let md5 = md5Hash(filedata)
-    let newPath = convertCdnUrl(item, md5, '')
-    pathmap[item] = options.onlinecdn + '/' + newPath
-    osspathmap[item] = newPath
-  })
+  if (options.cdnPath.length === 1) {
+    options.cdnPath = options.cdnPath[0]
+    paths.forEach((item) => {
+      let filedata = fs.readFileSync(srcproject + item)
+      let md5 = md5Hash(filedata)
+      let newPath = convertCdnUrl(item, md5, '')
+      pathmap[item] = options.cdnPath + '/' + newPath
+      osspathmap[item] = newPath
+    })
+  } else {
+    paths.forEach((item) => {
+      let filedata = fs.readFileSync(srcproject + item)
+      let md5 = md5Hash(filedata)
+      let newPath = convertCdnUrl(item, md5, '')
+      let cdnPathIndex = parseInt(md5.slice(-6), 16) % options.cdnPath.length
+      pathmap[item] = options.cdnPath[cdnPathIndex] + '/' + newPath
+      osspathmap[item] = newPath
+    })
+  }
   return [paths, pathmap, osspathmap]
 }
 
@@ -73,7 +84,7 @@ export const pushFile = (options) => {
     },
     setting: {
       // root directory name
-      dir: options.cdndir,
+      dir: options.ossDir,
       // compare with the last cache file to decide if the file deletion is need
       noClean: true,
       force: false, // ignore cache file and force re-upload all the files
