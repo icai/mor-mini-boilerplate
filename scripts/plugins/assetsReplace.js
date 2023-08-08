@@ -19,19 +19,22 @@ export default class MorJSPluginAssetsReplace {
     }
     runner.hooks.beforeRun.tap(this.name, (command) => {
       hashFile()
+      // watch file
+      if (runner.commandOptions.watch) {
+        watch(assetsSrc, { delay: 1000 }, (cb) => {
+          hashFile()
+          pushFile({
+            src: assetsSrc,
+            base: assetsBase,
+            osspathmap,
+            cdndir,
+            version
+          })
+          cb()
+        })
+      }
     })
-    // watch image file
-    watch(assetsSrc, { delay: 1000 }, (cb) => {
-      hashFile()
-      pushFile({
-        src: assetsSrc,
-        base: assetsBase,
-        osspathmap,
-        cdndir,
-        version
-      })
-      cb()
-    })
+
     runner.hooks.preprocessorParser.tap(this.name, (fileContent, context, options) => {
       if (!/(\.(js|axml|wxml|acss|wxss|scss|less))|app\.json$/.test(options.fileInfo.path)) return fileContent
       // 对 js axml wxml ... app.json 文件进行一些前置处理
