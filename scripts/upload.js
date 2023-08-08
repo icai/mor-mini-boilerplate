@@ -21,7 +21,6 @@ export const convertCdnUrl = (item, md5Str, rootDir) => {
  * 文件md5
  */
 export const md5File = (options) => {
-  console.log('options', options)
   // 图片数组
   let paths = []
   // 图片路径映射
