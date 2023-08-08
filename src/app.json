@@ -1,5 +1,5 @@
 {
-  "pages": ["pages/todos/todos", "pages/add-todo/add-todo"],
+  "pages": ["pages/todos/todos", "pages/add-todo/add-todo", "pages/webview/webview"],
   "window": {
     "defaultTitle": "Todo App",
     "titleBarColor": "#323239"

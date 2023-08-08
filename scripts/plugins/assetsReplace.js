@@ -1,32 +1,31 @@
-import { md5Image, filePathReplace, pushImage } from '../upload.js'
-import { getConf } from '../env.js'
+import { md5File, filePathReplace, pushFile } from '../upload.js'
 import { watch } from 'gulp'
-const { onlinecdn, cdndir, imageSrc, imageBase, version } = getConf()
-
-export default class MorJSPluginImageReplace {
-  constructor() {
-    this.name = 'MorJSPluginImageReplace'
+export default class MorJSPluginAssetsReplace {
+  constructor(opts) {
+    this.opts = opts || {}
+    this.name = 'MorJSPluginAssetsReplace'
   }
   apply(runner) {
+    const { onlinecdn, cdndir, assetsSrc, assetsBase, version } = this.opts
     let paths = []
     let pathmap = {}
     let osspathmap = {}
-    const hashImage = () => {
-      ;[paths, pathmap, osspathmap] = md5Image({
-        src: imageSrc,
-        base: imageBase,
+    const hashFile = () => {
+      ;[paths, pathmap, osspathmap] = md5File({
+        src: assetsSrc,
+        base: assetsBase,
         onlinecdn
       })
     }
     runner.hooks.beforeRun.tap(this.name, (command) => {
-      hashImage()
+      hashFile()
     })
     // watch image file
-    watch(imageSrc, { delay: 1000 }, (cb) => {
-      hashImage()
-      pushImage({
-        src: imageSrc,
-        base: imageBase,
+    watch(assetsSrc, { delay: 1000 }, (cb) => {
+      hashFile()
+      pushFile({
+        src: assetsSrc,
+        base: assetsBase,
         osspathmap,
         cdndir,
         version

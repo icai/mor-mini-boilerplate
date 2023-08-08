@@ -1,19 +1,20 @@
 import { defineConfig } from '@morjs/cli'
 import { getDate } from './scripts/utils.js'
-import { getEnv } from './scripts/env.js'
-import MorJSPluginImageReplace from './scripts/plugins/imageReplace.js'
+import { getEnv, getConf } from './scripts/env.js'
+import MorJSPluginAssetsReplace from './scripts/plugins/assetsReplace.js'
 
+const { onlinecdn, cdndir, assetsSrc, assetsBase, version } = getConf()
 const injectEnv = getEnv()
 
 export default defineConfig([
   {
-    name: 'ali',
+    name: 'alipay',
     sourceType: 'alipay',
     target: 'alipay',
     // compileMode: 'transform',
     // processNodeModules: false,
     // allowSyntheticDefaultImports: false,
-    ignore: ['**/images/**/*'],
+    ignore: ['**/assets/**/*'],
     compilerOptions: {
       target: 'ES2017'
     },
@@ -23,16 +24,24 @@ export default defineConfig([
         ...injectEnv
       }
     },
-    plugins: [new MorJSPluginImageReplace()]
+    plugins: [
+      new MorJSPluginAssetsReplace({
+        onlinecdn,
+        cdndir,
+        assetsSrc,
+        assetsBase,
+        version
+      })
+    ]
   },
   {
-    name: 'ali',
+    name: 'wechat',
     sourceType: 'alipay',
     target: 'wechat',
     // compileMode: 'transform',
     // processNodeModules: false,
     // allowSyntheticDefaultImports: false,
-    ignore: ['**/images/**/*'],
+    ignore: ['**/assets/**/*'],
     compilerOptions: {
       target: 'ES2017'
     },
@@ -42,7 +51,15 @@ export default defineConfig([
         ...injectEnv
       }
     },
-    plugins: [new MorJSPluginImageReplace()]
+    plugins: [
+      new MorJSPluginAssetsReplace({
+        onlinecdn,
+        cdndir,
+        assetsSrc,
+        assetsBase,
+        version
+      })
+    ]
   },
   /**
    * 支付宝小程序转 Web 编译配置

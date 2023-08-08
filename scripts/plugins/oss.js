@@ -1,14 +1,13 @@
-import { md5Image, pushImage } from '../upload.js'
-import { getConf } from '../env.js'
-const { onlinecdn, cdndir, imageSrc, imageBase, version } = getConf()
-
+import { md5File, pushFile } from '../upload.js'
 const COMMAND_NAME = 'oss'
 
 export default class MorJSPluginOSS {
-  constructor() {
+  constructor(opts) {
+    this.opts = opts || {}
     this.name = 'MorJSPluginOSS'
   }
   apply(runner) {
+    const { onlinecdn, cdndir, assetsSrc, assetsBase, version } = this.opts
     // 可通过该 hook 拿到一个 cli 的实例
     runner.hooks.cli.tap(this.name, (cli) => {
       // 通过 cli.command 新建一个命令行指令
@@ -20,14 +19,14 @@ export default class MorJSPluginOSS {
       const command = cli.command(COMMAND_NAME, 'upload to oss')
       command.action((args, options, logger) => {
         // 命令行指令的执行逻辑
-        let [paths, pathmap, osspathmap] = md5Image({
-          src: imageSrc,
-          base: imageBase,
+        let [paths, pathmap, osspathmap] = md5File({
+          src: assetsSrc,
+          base: assetsBase,
           onlinecdn
         })
-        pushImage({
-          src: imageSrc,
-          base: imageBase,
+        pushFile({
+          src: assetsSrc,
+          base: assetsBase,
           osspathmap,
           cdndir,
           version

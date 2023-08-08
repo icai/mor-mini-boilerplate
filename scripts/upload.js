@@ -5,30 +5,32 @@ import { src } from 'gulp'
 import ossSync from 'gulp-oss-sync'
 
 /**
- * 转换图片CDN md5 路径
+ * 转换文件CDN md5 路径
  */
 export const convertCdnUrl = (item, md5Str, rootDir) => {
   let str =
     rootDir +
     item
-      .replace(/^\/images\//, '')
+      .replace(/^\/assets\//, '')
       .replace(/(\/|\\|\-)/g, '_')
-      .replace(/\.(png|jpg|jpeg|gif|webp|mp4)$/, `_${md5Str}.$1`)
+      .replace(/\.(png|jpg|jpeg|gif|webp|html|mp4)$/, `_${md5Str}.$1`)
   return str
 }
 
 /**
- * 图片md5
+ * 文件md5
  */
-export const md5Image = (options) => {
+export const md5File = (options) => {
+  console.log('options', options)
   // 图片数组
   let paths = []
   // 图片路径映射
   let pathmap = {}
   let osspathmap = {}
   paths = globby.sync([options.src], {
-    cwd: './'
+    base: options.base
   })
+  // console.log('paths', paths)
   let srcproject = options.base
   paths = paths.map((item) => item.replace(srcproject, '/'))
   paths.forEach((item) => {
@@ -56,7 +58,7 @@ export const filePathReplace = (content, paths, pathmap) => {
  * @param {*} options
  * @returns
  */
-export const pushImage = (options) => {
+export const pushFile = (options) => {
   const ossConf = {
     connect: {
       region: process.env.region,

@@ -1,0 +1,11 @@
+.page {
+  background: #dde3ec;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.flex {
+  flex: 1;
+  margin-bottom: 30rpx;
+}

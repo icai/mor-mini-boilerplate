@@ -1,0 +1,6 @@
+<view class="page">
+  <view class="flex">
+    <web-view src="/assets/html/agrement.html" onMessage="onAgreeMessage" >
+    </web-view>
+  </view>
+</view>

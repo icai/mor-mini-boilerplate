@@ -57,7 +57,7 @@ export const getConf = () => {
     cdn,
     cdndir,
     version: '1_0_0', // 版本号
-    imageSrc: './src/images/**/*',
-    imageBase: './src/'
+    assetsSrc: './src/assets/**/*',
+    assetsBase: './src/'
   }
 }

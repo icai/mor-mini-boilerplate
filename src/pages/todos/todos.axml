@@ -2,7 +2,7 @@
 <view class="page-todos">
 
   <view class="user">
-    <image class="avatar" src="{{user.avatar || '/images/logo.png'}}" background-size="cover"></image>
+    <image class="avatar" src="{{user.avatar || '/assets/images/logo.png'}}" background-size="cover"></image>
     <view class="nickname">{{user.nickName && user.nickName + '\'s' || 'My'}} Todo List</view>
   </view>
 
