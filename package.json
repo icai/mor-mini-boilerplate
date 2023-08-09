@@ -6,7 +6,7 @@
     "@morjs/core": "*"
   },
   "devDependencies": {
-    "@morjs/cli": "^1.0.75",
+    "@morjs/cli": "*",
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
     "@babel/core": "^7.17.8",
