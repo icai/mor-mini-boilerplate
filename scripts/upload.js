@@ -18,6 +18,30 @@ export const convertCdnUrl = (item, md5Str, rootDir) => {
 }
 
 /**
+ * 搜索依赖文件路径
+ */
+export const searchFiles = async (options, targetString) => {
+  targetString = targetString.replace(/^src/g, '')
+  const filePaths = globby.sync([options.assetsBase + '**/*'], {
+    base: options.assetsBase,
+    ignoreFiles: [options.assetsSrc]
+  })
+  let paths = []
+  for (const filePath of filePaths) {
+    try {
+      const fileContent = fs.readFileSync(filePath, 'utf8')
+      if (fileContent.includes(targetString)) {
+        // console.log('Found in:', filePath)
+        paths.push(filePath)
+      }
+    } catch (err) {
+      console.error('Error reading file:', err)
+    }
+  }
+  return paths
+}
+
+/**
  * 文件md5
  */
 export const md5File = (options) => {
@@ -50,13 +74,14 @@ export const md5File = (options) => {
       osspathmap[item] = newPath
     })
   }
-  return [paths, pathmap, osspathmap]
+  return [pathmap, osspathmap]
 }
 
 /**
  * 图片路径替换
  */
-export const filePathReplace = (content, paths, pathmap) => {
+export const filePathReplace = (content, pathmap) => {
+  const paths = Object.keys(pathmap)
   paths.forEach((item) => {
     content = content.replace(new RegExp(escapeReg(item), 'g'), pathmap[item])
   })

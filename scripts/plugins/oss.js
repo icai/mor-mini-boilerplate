@@ -19,7 +19,7 @@ export default class MorJSPluginOSS {
       const command = cli.command(COMMAND_NAME, 'upload to oss')
       command.action((args, options, logger) => {
         // 命令行指令的执行逻辑
-        let [paths, pathmap, osspathmap] = md5File({
+        let [pathmap, osspathmap] = md5File({
           src: assetsSrc,
           base: assetsBase,
           cdnPath
