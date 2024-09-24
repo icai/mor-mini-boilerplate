@@ -2,6 +2,7 @@
 
 > MorJS 最佳实践
 
+
 ## 扩展功能插件
 
 - [x] 环境变量注入运行时
@@ -50,6 +51,9 @@ cdnRoot=https://docs.w3cub.com/
 ## MorJS 使用
 
 请参考 `MorJS` 官方站点: [https://mor.eleme.io/](https://mor.eleme.io/)
+
+
+[阿里云OSS优化计划](https://www.aliyun.com/product/oss?source=5176.29345612&userCode=mas28ird)
 
 ## LICENSE
 
